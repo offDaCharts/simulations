@@ -1,15 +1,15 @@
-from math import *
-import random
+from globals import *
 
-def gaussienDist():
-   return 0 
+def tempGaussienDist(t, m):
+    k = constants.k
+    return random.gauss(0, sqrt(k*t/m)) 
 
 def boltzmannsDist(v, mass, temp, n):
     #implement integral
     return (mass/(2.0*pi*k*temp))**(n/2.0)*exp(-mass*v)
 
 def getBoltzmannsDistArray(mass, temp, n):
-    k = 1.3806e-23
+    k = constants.k
     v = []
     dv = 0.1
     i = 1
