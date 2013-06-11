@@ -40,17 +40,22 @@ def solvingPoissons(chamberLen, density, delta_x, gridSizeToChamber):
         if gridLen < 3 or chamberLen % 2 !=0:
             print "error"
         leftBound = gridLen/2 - gridWidth / 2
-        rightBound = gridLen/2 + gridWidth / 2 - 1
-        for i in range(0, gridWidth - 1):
-            grid.append([leftBound, leftBound + i])
-        for i in range(0, gridWidth - 1):
-            grid.append([leftBound + i, rightBound])
-        for i in range(0, gridWidth - 1):
-            grid.append([rightBound, rightBound - i])
-        for i in range(0, gridWidth - 1):
-            grid.append([rightBound - i, leftBound])
-        
+        rightBound = gridLen/2 + gridWidth / 2 - 1        
     else:
+        if chamberLen % 2 ==0:
+            print "error"
+        leftBound = (gridLen-1)/2 - (gridWidth-1) / 2
+        rightBound = (gridLen-1)/2 + (gridWidth-1) / 2
+
+    for i in range(0, gridWidth - 1):
+        grid.append([leftBound, leftBound + i])
+    for i in range(0, gridWidth - 1):
+        grid.append([leftBound + i, rightBound])
+    for i in range(0, gridWidth - 1):
+        grid.append([rightBound, rightBound - i])
+    for i in range(0, gridWidth - 1):
+        grid.append([rightBound - i, leftBound])
+        
         
     
     def createMatrixA(n):
