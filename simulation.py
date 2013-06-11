@@ -32,18 +32,47 @@ def initialize(n, numParticles, temp):
         parts.append(p)
     return parts
 
-def createMatrices(n):
-    #D = numpy.diagflat([-1]*(n-1),1) + numpy.diagflat([4]*n,0) + numpy.diagflat([-1]*(n-1),-1)
-    #negI = numpy.diagflat([-1]*(n),0)
-    diag = [-1]*(n**2-1)
-    for i in range(1,n):
-        diag[i*n-1] = 0
-    A = numpy.diagflat(diag,1) + numpy.diagflat([4]*n**2,0) + numpy.diagflat(diag,-1)
-    B = numpy.diagflat([-1]*(n**2-n),n) + numpy.diagflat([-1]*(n**2-n),-n)
-    A = A + B
-    return A
+def solvingPoissons(chamberLen, density, delta_x, gridSizeToChamber):
+    n = chamberLen - 2
+    gridWidth = math.floor(gridSizeToChamber * n)
+    grid = []
+    if gridWidth % 2 == 0:
+        if gridLen < 3 or chamberLen % 2 !=0:
+            print "error"
+        leftBound = gridLen/2 - gridWidth / 2
+        rightBound = gridLen/2 + gridWidth / 2 - 1
+        for i in range(0, gridWidth - 1):
+            grid.append([leftBound, leftBound + i])
+        for i in range(0, gridWidth - 1):
+            grid.append([leftBound + i, rightBound])
+        for i in range(0, gridWidth - 1):
+            grid.append([rightBound, rightBound - i])
+        for i in range(0, gridWidth - 1):
+            grid.append([rightBound - i, leftBound])
+        
+    else:
         
     
+    def createMatrixA(n):
+        #D = numpy.diagflat([-1]*(n-1),1) + numpy.diagflat([4]*n,0) + numpy.diagflat([-1]*(n-1),-1)
+        #negI = numpy.diagflat([-1]*(n),0)
+        diag = [-1]*(n**2-1)
+        for i in range(1,n):
+            diag[i*n-1] = 0
+        A = numpy.diagflat(diag,1) + numpy.diagflat([4]*n**2,0) + numpy.diagflat(diag,-1)
+        B = numpy.diagflat([-1]*(n**2-n),n) + numpy.diagflat([-1]*(n**2-n),-n)
+        A = A + B
+        return A
+
+    def getb(n gToC):
+        b = [0]*n**2
+        x2 = -delta_x**2
+        for i in range(1, gridLen - 1):
+            for j in range(1, gridLen - 1):
+                b[(i-1)*n+(j-1)] = x2 * density[i][j]
+        
+        
+            
 def calculateForce(p):
     
 
