@@ -32,7 +32,21 @@ def initialize(n, numParticles, temp):
         parts.append(p)
     return parts
 
+def createMatrices(n):
+    #D = numpy.diagflat([-1]*(n-1),1) + numpy.diagflat([4]*n,0) + numpy.diagflat([-1]*(n-1),-1)
+    #negI = numpy.diagflat([-1]*(n),0)
+    diag = [-1]*(n**2-1)
+    for i in range(1,n):
+        diag[i*n-1] = 0
+    A = numpy.diagflat(diag,1) + numpy.diagflat([4]*n**2,0) + numpy.diagflat(diag,-1)
+    B = numpy.diagflat([-1]*(n**2-n),n) + numpy.diagflat([-1]*(n**2-n),-n)
+    A = A + B
+    return A
+        
+    
 def calculateForce(p):
+    
+
     
     return 0
 
